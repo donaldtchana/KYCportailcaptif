@@ -1,0 +1,1 @@
+<script src="<?=$site_url?>/admin/assets/js/bootstrap.bundle.min.js"></script>

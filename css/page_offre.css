@@ -1,0 +1,127 @@
+@import url(https://fonts.googleapis.com/css?family=Lato:100,300,400,700,900,100italic,300italic,400italic,700italic,900italic);
+
+body {
+  background: #111d27;
+  background-image: url(../img/01-PLAYCE-PALMERAIE-RCI-1536x1024.jpg);
+  color: #111;
+  min-width: 320px;
+  font-size: 16px;
+  font-weight: 300;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  position: relative;
+  padding: 50px 20px;
+}
+
+.pricing {
+	text-align: center;
+	border: 5px solid #000000;
+	border-radius: 20px;
+	color: #000000;
+	font-size: 14px;
+	padding-left: 0;
+	margin-bottom: 30px;
+    font-family: Comic;
+}
+.pricing:hover {
+	background-color: #a2f88c;
+	text-align: center;
+	border: 5px solid #000000;
+	border-radius: 20px;
+	color: #000000;
+	font-size: 14px;
+	padding-left: 0;
+	margin-bottom: 30px;
+    font-family: Comic;
+}
+
+.pricing li:first-child,
+.pricing li:last-child {
+	padding: 20px 13px;
+}
+.pricing li {
+	list-style: none;
+	padding: 13px;
+}
+.pricing li + li {
+	border-top: 3px solid #000000;
+}
+.pricing big {
+	font-size: 32px;
+}
+.pricing h3 {
+	margin-bottom: 0;
+  font-size: 50px;
+}
+.pricing span {
+	font-size: 12px;
+	color: #000000;
+	font-weight: normal;
+}
+.pricing li:nth-last-child(2) {
+	padding: 30px 13px;
+}
+.pricing button {
+	width: auto;
+	margin: auto;
+	font-size: 15px;
+	font-weight: bold;
+	border-radius: 50px;
+	color: #ffffff;
+	padding: 9px 24px;
+	background: #000000;
+	opacity: 1;
+
+}
+.pricing button:hover {
+	opacity: .9;
+}
+.pricing button:active {
+	box-shadow: inset 0px 2px 2px rgba(0, 0, 0, 0.1);
+}
+/* pricing color */
+.p-green big,
+.p-green h3 {
+	color: #000000;
+}
+.p-green button {
+	background: #f77e38;
+}
+.p-green button:hover {
+	background: #eb0909;
+}
+.back{
+	margin-left: 623px;
+	background-color:#f77e38;
+} 
+.back:hover{
+	background-color:#eb0909;
+} 
+
+@media (max-width: 414px){
+	body {
+		background: #111d27;
+		background-image: url(../img/01-PLAYCE-PALMERAIE-RCI-1536x1024.jpg);
+		color: #111;
+		min-width: 30px;
+		font-size: 106px;
+		font-weight: 500;
+		line-height: 1.6;
+		-webkit-font-smoothing: antialiased;
+		position: relative;
+		padding: 50px 20px;
+		float: left;
+		
+	  }
+	.pricing {
+		text-align: center;
+		border: 5px solid #000000;
+		border-radius: 20px;
+		color: #000000;
+		font-size: 14px;
+		padding-left: 0;
+		margin-bottom: 30px;
+		font-family: Comic;
+		left: -800px;
+	}
+}
