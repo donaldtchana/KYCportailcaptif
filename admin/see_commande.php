@@ -2,13 +2,18 @@
 
 include("includes/dir.php");
 include("includes/securite.php");
-if (!is_boutique()){
-    echo "<script>window.open('index','_self');</script>";
-}
+
 
 if(!empty($_GET['id'])){
 
-    $query = $db->query("select commande.methode,commande.payer,commande.cloturer, commande.id as id_cmd , commande.total as total , commande.dates as dates ,commande.transaction_id as transaction_id , client.nom as noms , client.email as email, client.tel as tel from commande , client  where commande.id_client = client.id and commande.id_boutique=:boutique and commande.id=:id  LIMIT 1",array("boutique"=>$_SESSION['id_boutique'],"id"=>$_GET['id']));
+
+    if (is_boutique()) {
+        $query = $db->query("select commande.methode,commande.payer,commande.cloturer, commande.id as id_cmd , commande.total as total , commande.dates as dates ,commande.transaction_id as transaction_id , client.nom as noms , client.email as email, client.tel as tel from commande , client  where commande.id_client = client.id and commande.id_boutique=:boutique and commande.id=:id  LIMIT 1",array("boutique"=>$_SESSION['id_boutique'],"id"=>$_GET['id']));
+
+    } else {
+        $query = $db->query("select commande.methode,commande.payer,commande.cloturer, commande.id as id_cmd , commande.total as total , commande.dates as dates ,commande.transaction_id as transaction_id , client.nom as noms , client.email as email, client.tel as tel from commande , client  where commande.id_client = client.id  and commande.id=:id  LIMIT 1",array("id"=>$_GET['id']));
+
+    }
     if($query->rowCount() > 0){
 
         $row = $query->fetch();

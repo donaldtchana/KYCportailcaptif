@@ -35,11 +35,11 @@
                     <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
                                                  href="articles" aria-expanded="false"><i class="mdi me-2 mdi-table"></i><span
                                     class="hide-menu">Articles</span></a></li>
-                    <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                                 href="commande" aria-expanded="false"><i class="mdi me-2 mdi-table"></i><span
-                                    class="hide-menu">Commandes</span></a></li>
-                    <?php } ?>
 
+                    <?php } ?>
+                <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
+                                             href="commande" aria-expanded="false"><i class="mdi me-2 mdi-table"></i><span
+                                class="hide-menu">Commandes</span></a></li>
                 <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
                                              href="logout" aria-expanded="false"><i class="mdi me-2 mdi-table"></i><span
                                 class="hide-menu">Deconnexion</span></a></li>

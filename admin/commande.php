@@ -2,9 +2,7 @@
 
 include("includes/dir.php");
 include("includes/securite.php");
-if (!is_boutique()){
-    echo "<script>window.open('index','_self');</script>";
-}
+
 $page_name='Liste des commandes';
 
 ?>
@@ -14,15 +12,22 @@ $page_name='Liste des commandes';
     <?php include("views/partial/head.php"); ?>
 
     <script>
+        <?php
+
+                 if (is_boutique()){ ?>
         var print_column = [0,1,2,3,4,5,6,7];
-    </script>
+                <?php }else{ ?>
+        var print_column = [0,1,2,3,4,5,6,7,8];
+        <?php } ?>
+
+ </script>
 
 </head>
 <body>
 <div id="main-wrapper" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full"
-     data-sidebar-position="absolute" data-header-position="absolute" data-boxed-layout="full">
+  data-sidebar-position="absolute" data-header-position="absolute" data-boxed-layout="full">
 
-    <?php include("views/partial/admin_header.php"); ?>
+ <?php include("views/partial/admin_header.php"); ?>
 
     <?php include("views/partial/sidebar.php"); ?>
 
@@ -54,6 +59,10 @@ $page_name='Liste des commandes';
                         <th>ID</th>
                         <th>Noms du client</th>
                         <th>Téléphone</th>
+                        <?php
+                        if (is_admin()){ ?>
+                            <th>Boutique</th>
+                        <?php }?>
                         <th>Total</th>
                         <th>Methode de paiement</th>
                         <th>Payé</th>
@@ -66,8 +75,13 @@ $page_name='Liste des commandes';
                     <tbody>
                     <?php
 
+                    if (is_boutique()){
+                        $get_commandes = $db->query("select commande.methode,commande.payer,commande.cloturer, commande.id as id_cmd , commande.total as total , commande.dates as dates ,commande.transaction_id as transaction_id , client.nom as noms , client.email as email, client.tel as tel from commande , client  where commande.id_client = client.id and commande.id_boutique=:boutique   order by commande.id desc",array("boutique"=>$_SESSION['id_boutique']));
 
-                    $get_commandes = $db->query("select commande.methode,commande.payer,commande.cloturer, commande.id as id_cmd , commande.total as total , commande.dates as dates ,commande.transaction_id as transaction_id , client.nom as noms , client.email as email, client.tel as tel from commande , client  where commande.id_client = client.id and commande.id_boutique=:boutique   order by commande.id desc",array("boutique"=>$_SESSION['id_boutique']));
+                    }else{
+                        $get_commandes = $db->query("select commande.methode,commande.payer,commande.cloturer, commande.id as id_cmd , commande.total as total , commande.dates as dates ,commande.transaction_id as transaction_id , client.nom as noms , client.email as email, client.tel as tel,boutique.nom as boutique from commande , client , boutique  where commande.id_client = client.id and commande.id_boutique=boutique.id   order by commande.id desc");
+
+                    }
 
                     while($row = $get_commandes->fetch()){
                         ?>
@@ -81,6 +95,12 @@ $page_name='Liste des commandes';
                             <td>
                                 <?= $row->tel; ?>
                             </td>
+                            <?php
+                            if (is_admin()){ ?>
+                                <td>
+                                    <?= $row->boutique; ?>
+                                </td>
+                            <?php }?>
                             <td>
                                 <?= $row->total; ?>
                             </td>

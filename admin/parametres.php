@@ -102,6 +102,21 @@ if (!is_admin()){
                                 </div>
 
                             </div>
+                            <div class="form-group row">
+                                <label class="col-md-3 control-label">Video Principale : </label>
+
+                                <div class="col-md-7">
+
+                                    <input type="file"  name="vid_principale" accept="video/mp4" class="form-control">
+
+                                </div>
+                                <div class="col-md-2">
+                                    <?php if(!empty(get_setting($db,"vid_principale"))) {?>
+                                        <a href="<?= $site_url.'/saved_images/videos/'.get_setting($db,"vid_principale"); ?>" target="_blank" >Apercu</a>
+                                    <?php  } ?>
+                                </div>
+
+                            </div>
                             <div class="form-group">
                                 <div class="form-check">
                                     <input class="form-check-input" name="paypal" <?=get_setting($db,"paypal",true) ? 'checked' : '';?> type="checkbox" value="" id="paypal">
@@ -169,6 +184,7 @@ if (!is_admin()){
 
 if(isset($_POST['save_setting'])){
     $allowed = allowed_image_extensions();
+    $allowed_vid = allowed_video_extensions();
     save_setting($db,'site_url',$_POST['site_url']);
     if (isset($_POST['paypal'])){
         save_setting($db,'paypal','1');
@@ -206,7 +222,7 @@ if(isset($_POST['save_setting'])){
         if(!in_array($slider1_extension,$allowed) && !empty($slider1) ){
 
         }else{
-            $new_name_slider1=slugify(time().'_'.$slider1);
+            $new_name_slider1=time().'_'.$slider1;
             if(!empty(get_setting($db,"slider1"))) {
                 unlink("$dir/saved_images/sliders/".get_setting($db,"slider1"));
             }
@@ -226,7 +242,7 @@ if(isset($_POST['save_setting'])){
         if(!in_array($slider2_extension,$allowed) && !empty($slider2) ){
 
         }else{
-            $new_name_slider2=slugify(time().'_'.$slider2);
+            $new_name_slider2=time().'_'.$slider2;
             if(!empty(get_setting($db,"slider2"))) {
                 unlink("$dir/saved_images/sliders/".get_setting($db,"slider2"));
             }
@@ -246,12 +262,56 @@ if(isset($_POST['save_setting'])){
         if(!in_array($slider3_extension,$allowed) && !empty($slider3) ){
 
         }else{
-            $new_name_slider3=slugify(time().'_'.$slider3);
+            $new_name_slider3=time().'_'.$slider3;
             if(!empty(get_setting($db,"slider3"))) {
                 unlink("$dir/saved_images/sliders/".get_setting($db,"slider3"));
             }
             uploadToS3("saved_images/sliders/".$new_name_slider3,$tmp_slider3);
             save_setting($db,'slider3',$new_name_slider3);
+        }
+    }
+    $upload_vid=false;
+    if(file_exists($_FILES['vid_principale']['tmp_name']) && is_uploaded_file($_FILES['vid_principale']['tmp_name'])){
+        $vid_principale= $_FILES['vid_principale']['name'];
+        $tmp_vid_principale = $_FILES['vid_principale']['tmp_name'];
+        $upload_vid=true;
+    }
+    if($upload_slider3){
+
+        $slider3_extension = pathinfo($slider3, PATHINFO_EXTENSION);
+        if(!in_array($slider3_extension,$allowed) && !empty($slider3) ){
+
+        }else{
+            $new_name_slider3=time().'_'.$slider3;
+            if(!empty(get_setting($db,"slider3"))) {
+                unlink("$dir/saved_images/sliders/".get_setting($db,"slider3"));
+            }
+            uploadToS3("saved_images/sliders/".$new_name_slider3,$tmp_slider3);
+            save_setting($db,'slider3',$new_name_slider3);
+        }
+    }
+    $upload_vid=false;
+    if(file_exists($_FILES['vid_principale']['tmp_name']) && is_uploaded_file($_FILES['vid_principale']['tmp_name'])){
+        $vid_principale= $_FILES['vid_principale']['name'];
+        $tmp_vid_principale = $_FILES['vid_principale']['tmp_name'];
+        $upload_vid=true;
+
+    }
+    if($upload_vid && 1==2){
+echo 'la';
+        $vid_principale_extension = '.'.str_replace(pathinfo($vid_principale, PATHINFO_EXTENSION),'','.');
+echo $vid_principale_extension;
+        if(!in_array($vid_principale_extension,$allowed_vid) && !empty($vid_principale) ){
+
+        }else{
+
+
+            $new_name_vid_principale=time().'_'.$vid_principale;
+            if(!empty(get_setting($db,"vid_principale"))) {
+                unlink("$dir/saved_images/videos/".get_setting($db,"vid_principale"));
+            }
+            uploadToS3("saved_images/videos/".$new_name_vid_principale,$tmp_vid_principale);
+            save_setting($db,'vid_principale',$new_name_vid_principale);
         }
     }
     echo "<script>alert('Les parametres ont été sauvegardés avec succès.');</script>";
