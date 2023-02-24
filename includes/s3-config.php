@@ -35,7 +35,11 @@ function allowed_image_extensions(){
     return array("jpg", "jpeg", "png", "gif", "webp", "svg");
 
 }
+function allowed_video_extensions(){
 
+    return array("mp4","m4v");
+
+}
 
 
 ?>
