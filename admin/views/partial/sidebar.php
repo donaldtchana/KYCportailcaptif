@@ -1,3 +1,8 @@
+<style>
+    .sidebar-nav ul .sidebar-item .sidebar-link {
+        border-bottom: 1px solid #8080804a;
+    }
+</style>
 <aside class="left-sidebar" data-sidebarbg="skin6">
     <div class="scroll-sidebar">
         <nav class="sidebar-nav">
