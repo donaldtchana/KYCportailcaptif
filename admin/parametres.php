@@ -52,6 +52,12 @@ if (!is_admin()){
                                     <input required type="text" value="<?=get_setting($db,"site_url")?>" name="site_url" placeholder="" class="form-control ps-0 form-control-line">
                                 </div>
                             </div>
+                            <div class="form-group">
+                                <label class="col-md-12 mb-0">Stock Alerte</label>
+                                <div class="col-md-12">
+                                    <input required type="number" value="<?=get_setting($db,"stock_alert")?>" name="stock_alert" placeholder="" class="form-control ps-0 form-control-line">
+                                </div>
+                            </div>
                             <div class="form-group row">
                                 <label class="col-md-3 control-label">Slider 1 : </label>
 
@@ -184,6 +190,8 @@ if(isset($_POST['save_setting'])){
     }else{
         save_setting($db,'perfect_pay','0');
     }
+
+    save_setting($db,'stock_alert',$_POST['stock_alert']);
     save_setting($db,'paypal_client_id',$_POST['paypal_client_id']);
     save_setting($db,'paypal_key_secrete',$_POST['paypal_key_secrete']);
     $upload_slider1=false;
