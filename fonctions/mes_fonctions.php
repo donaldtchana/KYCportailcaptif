@@ -1,5 +1,45 @@
 <?php
 
+function _l($key)
+{
+
+
+    if( !empty($_SESSION['lang'])){
+        if( $_SESSION['lang']=='en'){
+            $language= 'en';
+        }else{
+            $language= 'fr';
+        }
+    }else{
+        $language= 'fr';
+    }
+    include 'lang/'.$language.'.php';
+    $langs=$lang;
+    if (!empty($langs[$key])){
+        return $langs[$key];
+    }else{
+        return $key;
+    }
+
+}
+function get_language()
+{
+
+
+    if( !empty($_SESSION['lang'])){
+        if( $_SESSION['lang']=='en'){
+            $language= 'en';
+        }else{
+            $language= 'fr';
+        }
+    }else{
+        $language= 'fr';
+    }
+
+    return $language;
+
+
+}
 function is_connected()
 {
     $connected = @fsockopen("www.example.com", 80);

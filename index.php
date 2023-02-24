@@ -137,6 +137,13 @@ if (isset($_POST['save'])){
         </style>
     </head>
     <body>
+    <div class="change-language d-none d-sm-block">
+        <select class="language-bar" onChange="window.location.href=this.value">
+            <option value="<?=$site_url?>?url=<?=$url_page?>&&lang=fr" <?=(get_language()=='fr') ? 'selected' : null?> >Francais</option>
+            <option value="<?=$site_url?>?url=<?=$url_page?>&&lang=en" <?=(get_language()=='en') ? 'selected' : null?>>English</option>
+
+        </select>
+    </div>
     <div class="row">
         <div class="col-md-4">
         </div>
