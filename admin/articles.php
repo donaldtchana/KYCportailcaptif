@@ -53,12 +53,12 @@ if(!empty($_GET['id_article'])){
     </script>
 <style>
     .red_class{
-        background-color: red!important;
-        color: white!important;
+        color: red!important;
+        font-weight: 700!important;
     }
     .yellow_class{
-        background-color: yellow!important;
-        color:black!important;
+        color:#ffb22b!important;
+        font-weight: 700!important;
     }
 </style>
 </head>
@@ -103,7 +103,7 @@ if(!empty($_GET['id_article'])){
         </div>
 
         <div class="container-fluid">
-            <h2 class="mb-5 black_title">Listes des articles</h2>
+            <h2 class="mb-5 black_title"style="margin-bottom: 1rem!important;">Listes des articles</h2>
             <div class="table-responsive">
                 <table id="datatable" class="display table user-table" style="width:100%">
                     <thead>
@@ -122,6 +122,8 @@ if(!empty($_GET['id_article'])){
                     <tbody>
                     <?php
                     $i=1;
+                    $qte_alerte=0;
+                    $qte_epuise=0;
 
                     $get_articles = $db->query("select article.id as ids , article.nom as noms,article.image,article.prix,article.stock,article.status,categorie_articles.nom as categorie from article , categorie_articles  where categorie_articles.id = article.cat and id_boutique=:boutique  order by noms asc",array("boutique"=>$_SESSION['id_boutique']));
 
@@ -129,12 +131,14 @@ if(!empty($_GET['id_article'])){
                         $class = "";
                         if ($row->stock == 0) {
                             $class = "red_class";
+                            $qte_epuise++;
                         } elseif ($row->stock < get_setting($db, "stock_alert")) {
                             $class = "yellow_class";
+                            $qte_alerte++;
                         }
 
                         ?>
-                        <tr class="<?= $class; ?>">
+                        <tr >
                             <td>
                                 <?= $i; ?>
                             </td>
@@ -149,7 +153,7 @@ if(!empty($_GET['id_article'])){
                             <td>
                                 <?= money_format($row->prix); ?>
                             </td>
-                            <td>
+                            <td class="<?= $class; ?>">
                                 <?= $row->stock; ?>
                             </td>
                             <td>
@@ -177,8 +181,20 @@ if(!empty($_GET['id_article'])){
                         </tr>
 
                     <?php $i++; } ?>
-
                     <! test alerte>
+                    <?php
+                    $class = "";
+                    if($qte_alerte !=0){
+                        ?>
+                    <b>  vous avez <label class="yellow_class"> <?= $qte_alerte; ?></label> article(s) en  arlete</b> <br>
+                    <?php  } ?>
+                    <?php
+                    if ($qte_epuise !=0){
+                        ?>
+                  <b>  vous avez <label class="red_class"><?= $qte_epuise; ?></label> article(s) epuisé(s)</b>
+                    <?php  } ?>
+
+
 
 
                     </tbody>
