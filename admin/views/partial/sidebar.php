@@ -43,7 +43,7 @@
 
                     <?php } ?>
                 <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                             href="commande" aria-expanded="false"><i class="mdi me-2 mdi-table"></i><span
+                                             href="commande" aria-expanded="false"><i class="ti-pencil-alt"></i><span
                                 class="hide-menu">Commandes</span></a></li>
                 <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
                                              href="logout" aria-expanded="false"><i class="ti-power-off"></i><span
