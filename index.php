@@ -155,22 +155,23 @@ if (isset($_POST['save'])){
                 <h2 style="text-align: center"><?=_l('text_login')?></h2>
                 <form action="" method="POST">
                     <div class="inputBx">
-                        <input type="text" class="" name="nom" placeholder="<?=_l('enter_your_name')?>" required>
+                        <input type="text" class="" name="nom"  placeholder="<?=_l('enter_your_name')?>" required>
                     </div>
                     <div class="inputBx">
-                        <input type="text" name="prenom" placeholder="Entrer votre prenom" required>
+                        <input type="text" name="prenom" placeholder="<?=_l('enter_your_surname')?>" required>
                     </div>
                     <div class="inputBx">
-                        <input type="text" name="quartier" placeholder="Entrer votre quartier" required>
+                        <input type="text" name="quartier" placeholder="<?=_l('enter_your_quater')?>" required>
                     </div>
                     <div class="inputBx">
-                        <input type="email" name="email" placeholder="Entrer votre email" required>
+                        <input type="email" name="email" placeholder="<?=_l('enter_your_email')?>" required>
                     </div>
                     <div class="inputBx">
-                        <input type="tel" name="telephone" placeholder="Entrer votre téléphone" required>
+                        <input type="tel" name="telephone" placeholder="<?=_l('enter_your_mobile')?>" required>
                     </div>
                     <div class="inputBx">
-                        <input style="margin-left: 0px !important;margin-right: 0px !important;" type="submit" class="btn" value="Se connecter" name="save">
+                        <input style="..." type="submit" class="btn" value="<?=_l('btn_save')?>" name="save"
+                    </div>
                     </div>
                 </form>
             </div>
