@@ -51,7 +51,16 @@ if(!empty($_GET['id_article'])){
     <script>
         var print_column = [ 0, 1,3,4,5];
     </script>
-
+<style>
+    .red_class{
+        background-color: red!important;
+        color: white!important;
+    }
+    .yellow_class{
+        background-color: yellow!important;
+        color:black!important;
+    }
+</style>
 </head>
 <body>
 <div id="main-wrapper" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full"
@@ -117,8 +126,15 @@ if(!empty($_GET['id_article'])){
                     $get_articles = $db->query("select article.id as ids , article.nom as noms,article.image,article.prix,article.stock,article.status,categorie_articles.nom as categorie from article , categorie_articles  where categorie_articles.id = article.cat and id_boutique=:boutique  order by noms asc",array("boutique"=>$_SESSION['id_boutique']));
 
                     while($row = $get_articles->fetch()){
+                        $class = "";
+                        if ($row->stock == 0) {
+                            $class = "red_class";
+                        } elseif ($row->stock < get_setting($db, "stock_alert")) {
+                            $class = "yellow_class";
+                        }
+
                         ?>
-                        <tr>
+                        <tr class="<?= $class; ?>">
                             <td>
                                 <?= $i; ?>
                             </td>
@@ -161,6 +177,9 @@ if(!empty($_GET['id_article'])){
                         </tr>
 
                     <?php $i++; } ?>
+
+                    <! test alerte>
+
 
                     </tbody>
 
