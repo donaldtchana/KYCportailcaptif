@@ -35,9 +35,52 @@ Aucun article trouvé
 <?php }
 while($row = $get_boutiques->fetch()){
 ?>
+    <div class="modal fade product-modal" id="product-<?= $row->id; ?>" role="dialog" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content shadow">
+                <a class="close" data-dismiss="modal"> <span class="ti-close"></span></a>
+                <div class="modal-body">
+
+                    <div class="carousel slide product-slide" id="product-carousel">
+                        <div class="carousel-inner cont-slider">
+                            <div class="item active"> <img alt="" src="<?= $site_url.'/saved_images/article/'.$row->image; ?>" title=""> </div>
+
+                        </div>
+
+
+                    </div>
+
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-8 col-md-push-2">
+                                <div class="row">
+                                    <div class="col-md-7">
+                                        <h3 class="pull-left nk section-heading"><?= $row->nom; ?></h3>
+                                    </div>
+                                    <div class="col-md-5">
+											<span class="product-right-section">
+												<span style="font-size: 25px;"><?= money_format($row->prix); ?> </span>
+												<button class="btn btn-default add-item" type="button" data-image="<?= $site_url.'/saved_images/article/'.$row->image; ?>" data-name="<?= $row->nom; ?>" data-cost="<?= $row->prix; ?>" data-id="<?= $row->id; ?>">
+												Ajouter au panier</button>
+											</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-8 col-md-push-2 product-description">
+
+                                <p> <?= $row->description; ?> </p>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <li class="swiper-slidess text-center">
 								<span class="product-list-left pull-left">
-									<a href="#" ><img alt="product image" class="product-list-primary-img" src="<?= $site_url.'/saved_images/article/'.$row->image; ?>">
+									<a href="#" data-target="#product-<?= $row->id; ?>" data-toggle="modal"><img alt="product image" class="product-list-primary-img" src="<?= $site_url.'/saved_images/article/'.$row->image; ?>">
 									<img alt="product image" class="product-list-secondary-img" src="<?= $site_url.'/saved_images/article/'.$row->image; ?>">
 									</a>
 								</span>
