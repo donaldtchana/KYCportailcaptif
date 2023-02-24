@@ -152,10 +152,10 @@ if (isset($_POST['save'])){
                 <div class="logo">
                 <img src="<?=$site_url?>/assets_clients/img/LOGO-PLAYCE-.png" alt="playce">
                 </div>
-                <h2 style="text-align: center">Login</h2>
+                <h2 style="text-align: center"><?=_l('text_login')?></h2>
                 <form action="" method="POST">
                     <div class="inputBx">
-                        <input type="text" class="" name="nom" placeholder="Entrer votre nom" required>
+                        <input type="text" class="" name="nom" placeholder="<?=_l('enter_your_name')?>" required>
                     </div>
                     <div class="inputBx">
                         <input type="text" name="prenom" placeholder="Entrer votre prenom" required>
