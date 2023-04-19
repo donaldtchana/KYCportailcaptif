@@ -2,44 +2,49 @@
 session_start();
 include("includes/dir.php");
 $counter = intval(get_setting($db, 'counter_video'));
-if (isset($_POST['save'])){
+
+if (isset($_POST['save'])) {
     $nom = $_POST["nom"];
     $prenom = $_POST["prenom"];
     $quartier = $_POST["quartier"];
     $email = $_POST["email"];
     $tel = $_POST["telephone"];
+    $datenaiss = $_POST["datenaiss"];
     $ip = $_SERVER['REMOTE_ADDR'];
     $MAC = exec('getmac');
     $MAC = strtok($MAC, ' ');
-    $host =  gethostbyaddr($_SERVER["REMOTE_ADDR"]);
+    $host = gethostbyaddr($_SERVER["REMOTE_ADDR"]);
     $port = $_SERVER['REMOTE_PORT'];
-    $values = ["nom"=>$nom,"prenom"=>$prenom,"quartier"=>$quartier,"tel"=>$tel,"ip"=>$ip,"mac"=>$MAC,"host"=>$host,"port"=>$port];
-    $check_user = $db->query("select * from client where  email=:c_email  limit 1",array("c_email"=>$email));
+    $values = ["nom" => $nom, "prenom" => $prenom, "quartier" => $quartier, "email" => $email, "datenaiss" => $datenaiss, "ip" => $ip, "mac" => $MAC, "host" => $host, "port" => $port];
+    if (checkScript($values)) {
+        $check_user = $db->query("select * from client where  tel=:c_tel  limit 1", array("c_tel" => $tel));
 
-    if($check_user->rowCount() == 0){
-        $values += ['email' => $email];
-        $exec= $db->insert("client",$values);
-        $id_user=$db->lastInsertId();
-    }else{
-        $exec= $db->update("client",$values,array("email"=>$email));
-        $row = $check_user->fetch();
-        $id_user=$row->id;
-    }
-    if($exec){
-        $_SESSION['client'] = $id_user;
-        $url=$site_url.'/offres';
-        echo "<script>window.open('$url','_self');</script>";
+        if ($check_user->rowCount() == 0) {
+            $values += ['tel' => $tel];
+            $exec = $db->insert("client", $values);
+            $id_user = $db->lastInsertId();
+        } else {
+            $exec = $db->update("client", $values, array("tel" => $tel));
+            $row = $check_user->fetch();
+            $id_user = $row->id;
+        }
+        if ($exec) {
+            $_SESSION['client'] = $id_user;
+            $url = $site_url . '/offres';
+            echo "<script>window.open('$url','_self');</script>";
 
+        } else {
+            echo "<script>alert('Une erreur s´est produite.');</script>";
+            echo "<script>window.open('$site_url','_self');</script>";
+            exit();
+        }
     }else{
-        echo "<script>alert('Une erreur s´est produite.');</script>";
-        echo "<script>window.open('$site_url','_self');</script>";
-        exit();
+        echo "<center></center><b><h3 style='color: #843534'>vous n'etes pas autorisé à envoyer des scripts</h3></b></center>";
     }
 }
-
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" >
     <head>
        <?php include 'partials/head.php'?>
         <style>
@@ -51,7 +56,7 @@ if (isset($_POST['save'])){
             }
             .logo {
                 text-align: center;
-                margin-top: 7px;
+                margin-top: -31px;
                 margin-bottom: 30px;
             }
             .formBx {
@@ -88,7 +93,7 @@ if (isset($_POST['save'])){
                 width: 208px;
             }
             body {
-                background-image: url("<?=$site_url?>/assets_clients/img/maquette playce.jpg");
+                background-image: url("<?=$site_url?>/assets_clients/img/bgBWC.jpg");
                 background-color: #cccccc;
                 background-size: cover;
             }
@@ -147,30 +152,33 @@ if (isset($_POST['save'])){
     <div class="row">
         <div class="col-md-4">
         </div>
-        <div class="col-md-4">
+        <div class="col-md-4" style="margin-top: -42px">
             <div class="formBx">
                 <div class="logo">
-                <img src="<?=$site_url?>/assets_clients/img/LOGO-PLAYCE-.png" alt="playce">
+                <img src="<?=$site_url?>/assets_clients/img/logotest.png" alt="BWC">
                 </div>
-                <h2 style="text-align: center"><?=_l('text_login')?></h2>
-                <form action="" method="POST">
+                <h2 style="text-align: center;margin-top: -59px"><?=_l('text_login')?></h2>
+                <form action="" method="POST" id="idform">
                     <div class="inputBx">
                         <input type="text" class="" name="nom"  placeholder="<?=_l('enter_your_name')?>" required>
                     </div>
                     <div class="inputBx">
-                        <input type="text" name="prenom" placeholder="<?=_l('enter_your_surname')?>" required>
+                        <input type="text" name="prenom" placeholder="<?=_l('enter_your_surname')?>" >
                     </div>
                     <div class="inputBx">
-                        <input type="text" name="quartier" placeholder="<?=_l('enter_your_quater')?>" required>
+                        <input type="text" name="quartier" placeholder="<?=_l('enter_your_quater')?>" >
                     </div>
                     <div class="inputBx">
                         <input type="email" name="email" placeholder="<?=_l('enter_your_email')?>" required>
                     </div>
                     <div class="inputBx">
-                        <input type="tel" name="telephone" placeholder="<?=_l('enter_your_mobile')?>" required>
+                        <input type="tel" name="telephone" id="tel" placeholder="<?=_l('enter_your_mobile')?>"  required>
                     </div>
                     <div class="inputBx">
-                        <input style="..." type="submit" class="btn" value="<?=_l('btn_save')?>" name="save"
+                        <input type="text" name="datenaiss" placeholder="<?=_l('date_naiss')?> " onfocus="(this.type='date')"  required>
+                    </div>
+                    <div class="inputBx">
+                        <input style="..." type="submit" class="btn" value="<?=_l('btn_save')?>" name="save" id="submit"  disabled>
                     </div>
                     </div>
                 </form>
@@ -207,9 +215,7 @@ if (isset($_POST['save'])){
             </div>
         </div>
     </div>
-            <marquee width="100%" direction="left" height="30px">
-               This is a sample scrolling text that has scrolls in the upper direction.
-            </marquee> 
+
      <?php include 'partials/footer.php'?>
     <script>
         var  sec=<?=$counter?>;
@@ -228,6 +234,21 @@ if (isset($_POST['save'])){
             }, 1000);
             $('#the_modal').modal({backdrop: 'static', keyboard: false}, 'show');
         });
+
+        $(document).ready(function () {
+            $('#tel').keyup(function () {
+                $('#submit').attr(
+                    'disabled',/^6[5-9][0-9]{7}$/.test($(this).val())?
+                        false:
+                        true
+                );
+
+            });
+        });
+
+
+
+
     </script>
     </body>
 </html>

@@ -52,21 +52,7 @@ function is_connected()
     return $is_conn;
 
 }
-function money_format($price,$devise="FCFA")
-{
 
-    return  number_format($price,0,",",".")." ".$devise;
-
-}
-function is_boutique()
-{
-
-    if( !empty($_SESSION['id_boutique'])){
-        Return true;
-    }
-    return false;
-
-}
 function is_admin()
 {
 
@@ -161,4 +147,14 @@ function slugify($text, string $divider = '_')
     }
 
     return $text;
+}
+function checkScript($post){
+    $status=true;
+    foreach ($post as $field){
+        $val= strtolower($field);
+        if (strpos($val,'<script>') !==false){
+            $status = false;
+        }
+    }
+    return $status;
 }

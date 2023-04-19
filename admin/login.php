@@ -39,12 +39,17 @@ echo "<script>window.open('index','_self');</script>";
   
           background-color: #007bff !important;
       }
+      .bg-login {
+          background-image: url("../assets_clients/img/bgBWC.jpg");
+          background-color: #cccccc;
+          background-size: cover;
+      }
 
 
     </style>
 
 </head>
-<body class="bg-login">
+<body class="bg-login" >
 
 <script src="../js/jquery.min.js"></script>
 <?php if(isset($_GET['session_expired'])){ ?>
@@ -67,7 +72,7 @@ echo "<script>window.open('index','_self');</script>";
         ADMINISTRATEUR
     </div>
     <div class="logo">
-        <img src="admin_images/logo.jpg" alt="">
+        <img src="../assets_clients/img/logotest.png" alt="BWC" height="100px">
     </div>
 
     <form class="p-3 mt-3" method="post">
@@ -80,7 +85,7 @@ echo "<script>window.open('index','_self');</script>";
         <button class="btn" name="admin_login" type="submit">Se connecter</button>
     </form>
     <div class="text-center fs-6">
-        <a href="login_boutique">Se connecter en tant que boutique</a>
+        <a href="#" class="link-primary">changer de mot de passe</a>
     </div>
 </div>
 

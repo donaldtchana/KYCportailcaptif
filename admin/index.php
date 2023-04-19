@@ -180,7 +180,7 @@ $page_name='Tableau de bord';
         </div>
 
         <div class="container-fluid">
-            <h2 class="mb-5 black_title">Statistiques</h2>
+            <h2 class="mb-5 black_title">Statistique</h2>
             <div class="header-body">
                 <div class="row">
                     <?php
@@ -193,42 +193,6 @@ $page_name='Tableau de bord';
                                         <div class="col">
                                             <h5 class="card-title text-uppercase text-muted mb-0">Clients</h5>
                                             <span class="h2 font-weight-bold mb-0"><?=$db->count("client")?></span>
-                                        </div>
-
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xl-3 col-lg-6">
-                            <div class="card card-stats mb-4 mb-xl-0">
-                                <div class="card-body">
-                                    <div class="row">
-                                        <div class="col">
-                                            <h5 class="card-title text-uppercase text-muted mb-0">Boutiques Actives</h5>
-                                            <span class="h2 font-weight-bold mb-0">
-                                            <?php
-                                            $query = $db->query('SELECT * FROM boutique WHERE status = 1');
-                                            echo $query->rowCount();
-                                            ?>
-                                        </span>
-                                        </div>
-
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xl-3 col-lg-6">
-                            <div class="card card-stats mb-4 mb-xl-0">
-                                <div class="card-body">
-                                    <div class="row">
-                                        <div class="col">
-                                            <h5 class="card-title text-uppercase text-muted mb-0">Boutiques Inactives</h5>
-                                            <span class="h2 font-weight-bold mb-0">
-                                             <?php
-                                             $query = $db->query('SELECT * FROM boutique WHERE status <> 1');
-                                             echo $query->rowCount();
-                                             ?>
-                                        </span>
                                         </div>
 
                                     </div>

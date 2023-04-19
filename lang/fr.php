@@ -8,3 +8,4 @@ $lang['enter_your_quater']= 'Entrer votre quartier';
 $lang['enter_your_email']= 'Entrer votre email';
 $lang['enter_your_mobile']= 'Entrer votre téléphone';
 $lang['btn_save']= 'Se connecter';
+$lang['date_naiss']= 'Entrer votre date de naissance ';

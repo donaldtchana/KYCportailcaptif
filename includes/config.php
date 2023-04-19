@@ -10,7 +10,7 @@ error_reporting(-1);
 @define('DB_USER', 'root');
 @define('DB_PORT', '3306');
 @define('DB_PASS', '');
-@define('DB_NAME', 'portail_captif');
+@define('DB_NAME', 'kyc_portail_captif');
 @define('SITE_NAME', 'Portail captif');
 @define('PAGINATION', 15);
 

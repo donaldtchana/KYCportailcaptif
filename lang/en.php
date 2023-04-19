@@ -8,3 +8,4 @@ $lang['enter_your_quater']= 'Enter your quarter';
 $lang['enter_your_email']= 'Enter your email';
 $lang['enter_your_mobile']= 'Enter your mobile';
 $lang['btn_save']= 'Save';
+$lang['date_naiss']= 'Enter birth day YYYY-DD-MM';

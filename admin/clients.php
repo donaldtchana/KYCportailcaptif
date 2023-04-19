@@ -12,7 +12,7 @@ $page_name='Liste des clients';
 <head>
     <?php include("views/partial/head.php"); ?>
     <script>
-        var print_column = [ 0, 1,2,3,4];
+        var print_column = [ 0, 1,2,3,4,5];
     </script>
 
 </head>
@@ -54,6 +54,7 @@ $page_name='Liste des clients';
                         <th>Prenom</th>
                         <th>Email</th>
                         <th>Téléphone</th>
+                        <th>Date naissance</th>
 
                     </tr>
                     </thead>
@@ -81,6 +82,9 @@ $page_name='Liste des clients';
                             </td>
                             <td>
                                 <?= $row->tel; ?>
+                            </td>
+                            <td>
+                                <?= $row->datenaiss; ?>
                             </td>
 
 

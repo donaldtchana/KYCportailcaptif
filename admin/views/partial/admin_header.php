@@ -10,7 +10,7 @@
 
                 <span class="logo-text">
 
-                            <img src="<?=$site_url?>/admin/admin_images/logodashbord.png" alt="" class="dark-logo the_logo" />
+                            <img src="<?=$site_url?>/admin/admin_images/logotest.png" alt="" height="100px" class="dark-logo the_logo"  style="margin-top: -16px"/>
 
                         </span>
             </a>

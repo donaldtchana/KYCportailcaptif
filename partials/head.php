@@ -5,3 +5,4 @@
 <link rel="stylesheet" href="<?=$site_url?>/assets_clients/css/paiement.css">
 <link rel="stylesheet" href="<?=$site_url?>/assets_clients/css/bootstrap-light.css">
 <link rel="stylesheet" href="<?=$site_url?>/assets_clients/css/glyphicons.css">
+<link rel="shortcut icon" href="favicon.ico" type="image/x-icon"/>
